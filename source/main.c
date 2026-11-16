@@ -53,10 +53,10 @@ int main(int argc, char **argv) {
 	GX_InvalidateTexAll();
 
 	if(widescreen) {
-		guPerspective(perspective, 20.0f, aspect, 0.1F, 300.0F);
+		guPerspective(perspective, 20.0f, aspect, 0.1F, 300.0f);
 		guOrtho(overlaypersp, 1.0f, -1.0f, -1.0f, 1.0f, 0.1f, 50.0f);
 	} else {
-		guPerspective(perspective, 23.0f, aspect, 0.1F, 300.0F);
+		guPerspective(perspective, 23.0f, aspect, 0.1F, 300.0f);
 		guOrtho(overlaypersp, 1.0f, -1.0f, -0.8f, 0.8f, 0.1f, 50.0f);
 	}
 
@@ -115,6 +115,8 @@ int main(int argc, char **argv) {
 		struct gforce_t gforce;
 		WPAD_GForce(0, &gforce);
 		if(gforce.z > 3.0f) flip |= 1;
+		// A dedicated button makes tricks usable without motion controls in Dolphin.
+		if((wpaddown & WPAD_BUTTON_1) || (paddown & PAD_BUTTON_X)) flip |= 1;
 		if(aframe > 262) flip &= ~1;
 
 		if(flip & 2) { flip = 2; flipctr++; }
