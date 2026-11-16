@@ -116,7 +116,7 @@ int main(int argc, char **argv) {
 		WPAD_GForce(0, &gforce);
 		if(gforce.z > 3.0f) flip |= 1;
 		// A dedicated button makes tricks usable without motion controls in Dolphin.
-		if((wpaddown & WPAD_BUTTON_1) || (paddown & PAD_BUTTON_X)) flip |= 1;
+		if(wpaddown & WPAD_BUTTON_1) flip |= 1;
 		if(aframe > 262) flip &= ~1;
 
 		if(flip & 2) { flip = 2; flipctr++; }
